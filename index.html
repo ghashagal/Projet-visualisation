@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sport en Suisse : activité, COVID, accidents et coûts</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
+</head>
+<body>
+  <main class="page">
+    <header class="hero">
+      <p class="kicker">Visualisation interactive · Suisse</p>
+      <h1>Sport en Suisse : pratiques sportives, rupture COVID et coûts des accidents</h1>
+      <p class="intro">
+        Depuis plusieurs décennies, les pratiques sportives évoluent en Suisse. Cette visualisation retrace cette évolution, met en évidence la rupture provoquée par la pandémie de COVID-19 et présente les indicateurs les plus récents disponibles concernant les coûts des accidents. Cliquez sur une année au hasard ou suivez le parcours guidé.
+      </p>
+    </header>
+
+    <section class="story card">
+      <div class="story-intro">
+        <strong>Parcours guidé : comprendre l'évolution du sport en Suisse</strong>
+        <span>Cette visualisation raconte trois périodes clés à partir des données disponibles. Cliquez sur une étape pour mettre en évidence la période correspondante.</span>
+      </div>
+      <button class="story-step active" data-step="boom"><span>Étape 1</span> Avant la COVID-19 (1978–2019)<em>Évolution des pratiques sportives</em></button>
+      <button class="story-step" data-step="covid"><span>Étape 2</span> La pandémie de COVID-19 (2020–2021)<em>Une rupture dans les tendances</em></button>
+      <button class="story-step" data-step="costs"><span>Étape 3</span> Les dernières observations (2022–2023)<em>Les indicateurs les plus récents disponibles</em></button>
+      <p id="story-text"></p>
+    </section>
+
+    <section class="layout">
+      <div class="main">
+        <section class="card">
+          <div class="chart-head">
+            <div>
+              <h2>Vue 1 — Activité sportive</h2>
+              <p>Évolution des pratiques sportives selon les enquêtes Sport Suisse. Unité : % de la population.</p>
+            </div>
+            <div class="toolbar compact">
+              <button class="metric primary active" data-chart="top" data-metric="very_active_pct">Très actifs <span class="button-unit">% de la population</span></button>
+              <button class="metric primary" data-chart="top" data-metric="inactive_pct">Non-sportifs <span class="button-unit">% de la population</span></button>
+            </div>
+          </div>
+          <div id="chart-top" class="chart"></div>
+        </section>
+
+        <section class="card">
+          <div class="chart-head">
+            <div>
+              <h2>Vue 2 — Accidents et coûts</h2>
+              <p>Évolution des accidents et des coûts liés aux accidents sportifs. Accidents en milliers ; coûts UVG (assurance-accidents obligatoire) et coûts totaux en millions de CHF.</p>
+            </div>
+            <div class="toolbar compact">
+              <button class="metric secondary active" data-chart="bottom" data-metric="sport_accidents_total_thousands">Accidents <span class="button-unit">milliers</span></button>
+              <button class="metric secondary" data-chart="bottom" data-metric="uvg_cost_mio_chf">Coûts UVG <span class="button-unit">mio CHF</span></button>
+              <button class="metric secondary" data-chart="bottom" data-metric="total_material_cost_population_mio_chf">Coûts totaux <span class="button-unit">mio CHF</span></button>
+            </div>
+          </div>
+          <div id="chart-bottom" class="chart small"></div>
+        </section>
+
+        <section class="card">
+          <div class="chart-head">
+            <div>
+              <h2>Vue 3 — Comparer les risques et les coûts selon le sport</h2>
+              <p>Classement interactif selon le risque de blessure ou le coût économique. Les unités sont indiquées sur l’axe horizontal.</p>
+            </div>
+            <select id="risk-select">
+              <option value="injuries_per_million_hours">Risque de blessure (blessés par million d’heures de pratique)</option>
+              <option value="cost_per_100_hours_chf">Coût pour 100 heures (CHF)</option>
+              <option value="cost_per_case_chf">Coût moyen par accident (CHF)</option>
+            </select>
+          </div>
+          <div id="risk-chart" class="chart risk"></div>
+        </section>
+      </div>
+
+      <aside class="card panel" id="details">
+        <p class="panel-label">Année observée</p>
+        <h2>2014</h2>
+        <div class="period-pill">Avant COVID</div>
+        <div class="stats"></div>
+        <div class="variation"></div>
+        <p class="note"></p>
+      </aside>
+    </section>
+    <section class="notes card">
+      <h2>Notes de lecture</h2>
+      <p><strong>UVG</strong> : assurance-accidents obligatoire en Suisse.</p>
+      <p><strong>mio CHF</strong> : millions de francs suisses.</p>
+      <p><strong>Blessés par million d’heures de pratique</strong> : nombre de blessés rapporté à un million d’heures de pratique, afin de comparer les sports sans pour autant tenir compte de leur popularité.</p>
+      <p><strong>Disponibilité des données</strong> : les différentes évolutions dans le temps ne couvrent pas toutes les mêmes années. Les accidents sportifs sont par exemple disponibles jusqu’en 2022, tandis que les coûts UVG sont disponibles jusqu’en 2023.</p>
+    </section>
+
+    <footer>
+      Sources : Observatoire Sport et activité physique Suisse, Sport Suisse light 2022, BFU/SSUV.
+      Données intégrées dans <code>data.csv</code> et <code>sports_risk.csv</code>.
+    </footer>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
